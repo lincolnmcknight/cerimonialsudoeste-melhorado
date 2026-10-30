@@ -1,0 +1,41 @@
+{
+  "name": "Cerimonial Sudoeste",
+  "short_name": "Sudoeste",
+  "description": "A programação dos cultos do Cerimonial Sudoeste, sempre atualizada.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1b1340",
+  "theme_color": "#1b1340",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "lang": "pt-BR",
+  "shortcuts": [
+    {
+      "name": "Tela de retorno",
+      "url": "/retorno"
+    },
+    {
+      "name": "Painel",
+      "url": "/admin"
+    }
+  ]
+}

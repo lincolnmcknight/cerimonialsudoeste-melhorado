@@ -1,0 +1,1 @@
+REVOKE SELECT (criado_por) ON public.programacoes FROM anon;

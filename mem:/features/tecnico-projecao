@@ -1,0 +1,6 @@
+---
+name: Técnico de Projeção
+description: Perfil restrito que apenas visualiza programações publicadas e gera arquivos LouvorJA
+type: feature
+---
+O perfil tecnico_projecao pode visualizar programações publicadas e gerar/baixar o arquivo LouvorJA com todos os itens. Não pode criar, editar, publicar, excluir, usar cronômetro ou gerenciar usuários.

@@ -1,0 +1,200 @@
+#lovable-badge {
+  display: none !important;
+}
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Cerimonial Sudoeste — sistema visual
+  ------------------------------------
+  Nasce do próprio logo: o "CS" em serifa de alto contraste sobre um vitral
+  que vai do magenta ao anil. Fundo de papel frio (não creme), tinta índigo,
+  magenta e anil como cores de marca e um dourado de vela usado apenas para
+  marcar "agora" na programação.
+*/
+
+@theme inline {
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-success: var(--success);
+  --color-anil: var(--anil);
+  --color-noite: var(--noite);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Paleta base */
+  --noite: #1b1340; /* tinta índigo — cabeçalhos, texto forte */
+  --magenta: #b8336a; /* vitral — ações de marca */
+  --anil: #2b4ea2; /* vitral — links, foco */
+  --papel: #f6f5fa; /* fundo frio */
+  --linha: #e3e0ec; /* bordas */
+  --vela: #e8b04b; /* dourado — só para "agora" */
+
+  --background: var(--papel);
+  --foreground: #1d1838;
+
+  --card: #ffffff;
+  --card-foreground: #1d1838;
+  --popover: #ffffff;
+  --popover-foreground: #1d1838;
+
+  --primary: var(--noite);
+  --primary-foreground: #fbfaff;
+
+  --secondary: #ecebf4;
+  --secondary-foreground: var(--noite);
+
+  --muted: #efedf5;
+  --muted-foreground: #615c7a;
+
+  --accent: var(--magenta);
+  --accent-foreground: #ffffff;
+
+  --destructive: #c2362f;
+  --destructive-foreground: #ffffff;
+
+  --success: #2f8a5b;
+  --gold: var(--vela);
+
+  --border: var(--linha);
+  --input: #d9d5e6;
+  --ring: var(--anil);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 0;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Cabeçalho: tinta índigo com a faixa de vitral do logo na base */
+.cabecalho {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in oklab, var(--anil) 55%, transparent) 0%, transparent 60%),
+    radial-gradient(90% 80% at 0% 0%, color-mix(in oklab, var(--magenta) 45%, transparent) 0%, transparent 55%),
+    var(--noite);
+  color: #fbfaff;
+}
+.cabecalho::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--magenta), #6a2c86 45%, var(--anil));
+}
+
+/* Fundo do "vitral" usado em telas de entrada (login, nova senha) */
+.vitral {
+  background:
+    radial-gradient(80% 60% at 0% 0%, color-mix(in oklab, var(--magenta) 70%, transparent) 0%, transparent 60%),
+    radial-gradient(90% 70% at 100% 100%, color-mix(in oklab, var(--anil) 80%, transparent) 0%, transparent 60%),
+    var(--noite);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Trilho da ordem do culto */
+.trilho {
+  background: linear-gradient(180deg, var(--linha), var(--linha));
+}
+.marco {
+  background: var(--card);
+  border: 2px solid var(--noite);
+}
+.marco-agora {
+  background: var(--vela);
+  border-color: var(--vela);
+  box-shadow: 0 0 0 5px color-mix(in oklab, var(--vela) 30%, transparent);
+}
+.marco-passado {
+  background: var(--linha);
+  border-color: var(--linha);
+}
+
+.sem-barra::-webkit-scrollbar {
+  display: none;
+}
+.sem-barra {
+  scrollbar-width: none;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .cabecalho {
+    background: none !important;
+    color: #000 !important;
+  }
+  .cabecalho::after {
+    display: none;
+  }
+  body {
+    background: #fff;
+  }
+}

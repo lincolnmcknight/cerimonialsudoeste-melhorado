@@ -239,6 +239,9 @@ function AuthPage() {
             </button>
           </div>
         </div>
+        <Link to="/privacidade" className="mt-5 text-sm text-white/60 hover:text-white hover:underline">
+          Política de privacidade
+        </Link>
       </div>
     </div>
   );

@@ -9,28 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RetornoRouteImport } from './routes/retorno'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as RetornoCodeRouteImport } from './routes/retorno.$code'
-import { Route as ProgramacaoIdRouteImport } from './routes/programacao.$id'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RetornoRouteImport } from './routes/retorno'
 import { Route as AuthenticatedNotificacoesRouteImport } from './routes/_authenticated/notificacoes'
+import { Route as ProgramacaoIdRouteImport } from './routes/programacao.$id'
+import { Route as RetornoCodeRouteImport } from './routes/retorno.$code'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
-import { Route as AuthenticatedAdminNovaRouteImport } from './routes/_authenticated/admin.nova'
-import { Route as AuthenticatedAdminAcessosRouteImport } from './routes/_authenticated/admin.acessos'
 import { Route as AuthenticatedAdminIdRouteImport } from './routes/_authenticated/admin.$id'
+import { Route as AuthenticatedAdminAcessosRouteImport } from './routes/_authenticated/admin.acessos'
+import { Route as AuthenticatedAdminNovaRouteImport } from './routes/_authenticated/admin.nova'
 import { Route as ApiPublicBackendSplatRouteImport } from './routes/api/public/backend/$'
 
-const RetornoRoute = RetornoRouteImport.update({
-  id: '/retorno',
-  path: '/retorno',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -38,23 +38,19 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RetornoCodeRoute = RetornoCodeRouteImport.update({
-  id: '/$code',
-  path: '/$code',
-  getParentRoute: () => RetornoRoute,
-} as any)
-const ProgramacaoIdRoute = ProgramacaoIdRouteImport.update({
-  id: '/programacao/$id',
-  path: '/programacao/$id',
+const RetornoRoute = RetornoRouteImport.update({
+  id: '/retorno',
+  path: '/retorno',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedNotificacoesRoute =
@@ -63,14 +59,24 @@ const AuthenticatedNotificacoesRoute =
     path: '/notificacoes',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ProgramacaoIdRoute = ProgramacaoIdRouteImport.update({
+  id: '/programacao/$id',
+  path: '/programacao/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RetornoCodeRoute = RetornoCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => RetornoRoute,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminNovaRoute = AuthenticatedAdminNovaRouteImport.update({
-  id: '/admin/nova',
-  path: '/admin/nova',
+const AuthenticatedAdminIdRoute = AuthenticatedAdminIdRouteImport.update({
+  id: '/admin/$id',
+  path: '/admin/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAdminAcessosRoute =
@@ -79,9 +85,9 @@ const AuthenticatedAdminAcessosRoute =
     path: '/admin/acessos',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdminIdRoute = AuthenticatedAdminIdRouteImport.update({
-  id: '/admin/$id',
-  path: '/admin/$id',
+const AuthenticatedAdminNovaRoute = AuthenticatedAdminNovaRouteImport.update({
+  id: '/admin/nova',
+  path: '/admin/nova',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const ApiPublicBackendSplatRoute = ApiPublicBackendSplatRouteImport.update({
@@ -93,6 +99,7 @@ const ApiPublicBackendSplatRoute = ApiPublicBackendSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/reset-password': typeof ResetPasswordRoute
   '/retorno': typeof RetornoRouteWithChildren
   '/notificacoes': typeof AuthenticatedNotificacoesRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/reset-password': typeof ResetPasswordRoute
   '/retorno': typeof RetornoRouteWithChildren
   '/notificacoes': typeof AuthenticatedNotificacoesRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/reset-password': typeof ResetPasswordRoute
   '/retorno': typeof RetornoRouteWithChildren
   '/_authenticated/notificacoes': typeof AuthenticatedNotificacoesRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/privacidade'
     | '/reset-password'
     | '/retorno'
     | '/notificacoes'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/privacidade'
     | '/reset-password'
     | '/retorno'
     | '/notificacoes'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/privacidade'
     | '/reset-password'
     | '/retorno'
     | '/_authenticated/notificacoes'
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   RetornoRoute: typeof RetornoRouteWithChildren
   ProgramacaoIdRoute: typeof ProgramacaoIdRoute
@@ -192,25 +205,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/retorno': {
-      id: '/retorno'
-      path: '/retorno'
-      fullPath: '/retorno'
-      preLoaderRoute: typeof RetornoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -220,25 +219,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/retorno/$code': {
-      id: '/retorno/$code'
-      path: '/$code'
-      fullPath: '/retorno/$code'
-      preLoaderRoute: typeof RetornoCodeRouteImport
-      parentRoute: typeof RetornoRoute
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/programacao/$id': {
-      id: '/programacao/$id'
-      path: '/programacao/$id'
-      fullPath: '/programacao/$id'
-      preLoaderRoute: typeof ProgramacaoIdRouteImport
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/retorno': {
+      id: '/retorno'
+      path: '/retorno'
+      fullPath: '/retorno'
+      preLoaderRoute: typeof RetornoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/notificacoes': {
@@ -248,6 +254,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNotificacoesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/programacao/$id': {
+      id: '/programacao/$id'
+      path: '/programacao/$id'
+      fullPath: '/programacao/$id'
+      preLoaderRoute: typeof ProgramacaoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/retorno/$code': {
+      id: '/retorno/$code'
+      path: '/$code'
+      fullPath: '/retorno/$code'
+      preLoaderRoute: typeof RetornoCodeRouteImport
+      parentRoute: typeof RetornoRoute
+    }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
       path: '/admin'
@@ -255,11 +275,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/nova': {
-      id: '/_authenticated/admin/nova'
-      path: '/admin/nova'
-      fullPath: '/admin/nova'
-      preLoaderRoute: typeof AuthenticatedAdminNovaRouteImport
+    '/_authenticated/admin/$id': {
+      id: '/_authenticated/admin/$id'
+      path: '/admin/$id'
+      fullPath: '/admin/$id'
+      preLoaderRoute: typeof AuthenticatedAdminIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/acessos': {
@@ -269,11 +289,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminAcessosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/$id': {
-      id: '/_authenticated/admin/$id'
-      path: '/admin/$id'
-      fullPath: '/admin/$id'
-      preLoaderRoute: typeof AuthenticatedAdminIdRouteImport
+    '/_authenticated/admin/nova': {
+      id: '/_authenticated/admin/nova'
+      path: '/admin/nova'
+      fullPath: '/admin/nova'
+      preLoaderRoute: typeof AuthenticatedAdminNovaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/public/backend/$': {
@@ -320,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   RetornoRoute: RetornoRouteWithChildren,
   ProgramacaoIdRoute: ProgramacaoIdRoute,

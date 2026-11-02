@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/programacao/$id")({
   component: Page,
   errorComponent: ({ error }) => (
-    <div className="p-8 text-center text-muted-foreground">Não foi possível carregar: {error.message}</div>
+    <div className="p-8 text-center text-muted-foreground">Não foi possível carregar: {error instanceof Error ? error.message : String(error)}</div>
   ),
 });
 

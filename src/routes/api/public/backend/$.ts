@@ -50,7 +50,7 @@ async function proxyBackendRequest(request: Request) {
     return new Response("Endpoint não permitido", { status: 403 });
   }
 
-  const upstreamBaseUrl = process.env.SUPABASE_URL;
+  const upstreamBaseUrl = process.env.SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL;
   if (!upstreamBaseUrl) {
     return new Response("Configuração do backend indisponível", { status: 500 });
   }

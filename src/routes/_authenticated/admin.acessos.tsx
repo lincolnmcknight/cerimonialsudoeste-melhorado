@@ -118,9 +118,8 @@ function AcessosPage() {
   async function handleDeleteUser(userId: string) {
     setExcluindoId(userId);
     try {
-      const { data, error } = await supabase.functions.invoke("admin-delete-user", { body: { userId } });
+      const { error } = await supabase.rpc("admin_excluir_usuario", { _user_id: userId });
       if (error) throw error;
-      if (data?.error) throw new Error(data.error);
       toast.success("Usuário excluído");
       qc.invalidateQueries({ queryKey: ["acessos"] });
     } catch (err) {

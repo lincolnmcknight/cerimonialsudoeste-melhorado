@@ -294,6 +294,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_excluir_usuario: { Args: { _user_id: string }; Returns: undefined }
       bootstrap_user_role: { Args: never; Returns: undefined }
       duplicar_programacao: {
         Args: { _nova_data: string; _prog_id: string }

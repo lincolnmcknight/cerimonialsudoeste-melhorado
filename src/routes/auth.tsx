@@ -29,6 +29,29 @@ function AuthPage() {
   const [resetting, setResetting] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [googleAtivo, setGoogleAtivo] = useState(false);
+
+  // Ao voltar para esta página (ex.: depois de abrir o Google e apertar
+  // "voltar"), o navegador pode restaurá-la com os botões ainda travados.
+  useEffect(() => {
+    const destravar = () => {
+      setLoading(false);
+      setResetting(false);
+    };
+    window.addEventListener("pageshow", destravar);
+    return () => window.removeEventListener("pageshow", destravar);
+  }, []);
+
+  // Só mostra "Continuar com Google" se o provedor estiver ativado no Supabase.
+  useEffect(() => {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    if (!url || !key) return;
+    fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((s) => setGoogleAtivo(Boolean(s?.external?.google)))
+      .catch(() => setGoogleAtivo(false));
+  }, []);
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
@@ -125,6 +148,8 @@ function AuthPage() {
               : "Com uma conta você recebe um aviso sempre que uma programação for publicada."}
           </p>
 
+          {googleAtivo && (
+            <>
           <button
             type="button"
             onClick={signInWithGoogle}
@@ -145,6 +170,9 @@ function AuthPage() {
             <span className="text-xs text-muted-foreground">ou com e-mail</span>
             <div className="h-px flex-1 bg-border" />
           </div>
+
+            </>
+          )}
 
           <form onSubmit={submit} className="space-y-4">
             {mode === "signup" && (
